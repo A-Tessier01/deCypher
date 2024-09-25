@@ -1,5 +1,7 @@
 import cv2
 import pytesseract 
+from gtts import gTTS
+import pyttsx3
 
 
 pytesseract.pytesseract.tesseract_cmd = r"C:\\Users\\ansel\\AppData\\Local\\Programs\\Tesseract-OCR\\tesseract.exe"
@@ -29,7 +31,11 @@ def get_pos(event, x, y, flags, params):
             print("we're here")
     return tl, br
 
-
+def play_sound(text, speed=178):
+    engine = pyttsx3.init()
+    engine.setProperty("rate", speed)
+    engine.say(text)
+    engine.runAndWait()
 
 # cv2.namedWindow('image')
 # cv2.setMouseCallback('image', get_pos)
@@ -60,6 +66,10 @@ try:
          
         if tl[0] != None and br[0] != tl[0]:
         #Crop image with bounding box
+
+
+
+
             to_process = frame[tl[1]:br[1], tl[0]:br[0]]
         #convert to RGB
             cc_to_process = cv2.cvtColor(to_process, cv2.COLOR_BGR2RGB)
@@ -67,6 +77,7 @@ try:
         # call pytesseract for OCR - this is a google wrapper, in future replace for improvement 
             result = pytesseract.image_to_string(cc_to_process)
             print(result)
+            play_sound(result)
         # call google api for text to speech
 
         # add visual indicator of words being read
