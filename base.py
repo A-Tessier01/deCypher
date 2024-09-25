@@ -2,7 +2,7 @@ import cv2
 import pytesseract 
 
 
-
+pytesseract.pytesseract.tesseract_cmd = r"C:\\Users\\ansel\\AppData\\Local\\Programs\\Tesseract-OCR\\tesseract.exe"
 
 tl = [None]*2
 br = [None]*2
@@ -57,9 +57,16 @@ try:
         # get input, mouse for now, eventually eye tracking
 
         # create bounding box around relevant words
+         
+        if tl[0] != None and br[0] != tl[0]:
+        #Crop image with bounding box
+            to_process = frame[tl[1]:br[1], tl[0]:br[0]]
+        #convert to RGB
+            cc_to_process = cv2.cvtColor(to_process, cv2.COLOR_BGR2RGB)
 
         # call pytesseract for OCR - this is a google wrapper, in future replace for improvement 
-
+            result = pytesseract.image_to_string(cc_to_process)
+            print(result)
         # call google api for text to speech
 
         # add visual indicator of words being read
