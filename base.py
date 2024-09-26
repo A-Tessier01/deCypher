@@ -2,6 +2,8 @@ import cv2
 import pytesseract 
 from gtts import gTTS
 import pyttsx3
+import playsound 
+from multiprocessing import pool
 
 
 pytesseract.pytesseract.tesseract_cmd = r"C:\\Users\\ansel\\AppData\\Local\\Programs\\Tesseract-OCR\\tesseract.exe"
