@@ -5,6 +5,9 @@ import pyttsx3
 import threading
 from queue import Queue
 
+# TODO : 
+#   keep bounding box displayed until audio is finished
+#   anchor bounding box to background image
 
 pytesseract.pytesseract.tesseract_cmd = r"C:\\Users\\ansel\\AppData\\Local\\Programs\\Tesseract-OCR\\tesseract.exe"
 selected = Queue()
